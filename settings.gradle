@@ -1,0 +1,3 @@
+rootProject.name='appFrame'
+include ':app'
+include ':frame'
