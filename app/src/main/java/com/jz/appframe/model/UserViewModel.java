@@ -1,5 +1,12 @@
 package com.jz.appframe.model;
 
+import com.jz.appframe.db.NetApi;
+import com.jz.appframe.model.base.BaseVModel;
+
+import org.jetbrains.annotations.NotNull;
+
+import javax.inject.Inject;
+
 import androidx.lifecycle.ViewModel;
 
 /**
@@ -10,5 +17,9 @@ import androidx.lifecycle.ViewModel;
  * @describe TODO
  * @email jackzhouyu@foxmail.com
  **/
-public class UserViewModel extends ViewModel {
+public class UserViewModel extends BaseVModel {
+    @Inject
+    public UserViewModel(@NotNull NetApi api) {
+        super(api);
+    }
 }
