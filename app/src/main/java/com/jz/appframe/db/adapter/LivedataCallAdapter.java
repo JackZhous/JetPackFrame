@@ -1,4 +1,4 @@
-package com.jz.appframe.db;
+package com.jz.appframe.db.adapter;
 
 import com.jz.appframe.db.resp.ApiResponse;
 

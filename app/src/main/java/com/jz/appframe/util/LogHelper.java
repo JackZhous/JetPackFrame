@@ -1,4 +1,4 @@
-package com.jz.frame.util;
+package com.jz.appframe.util;
 
 import android.util.Log;
 
@@ -16,17 +16,17 @@ public class LogHelper {
 
     private static final String TAG = "j_tag";
 
-    public static final void de_i(String msg){
+    public static void de_i(String msg){
         Log.i(TAG, msg);
     }
 
-    public static final void de_i(Object msg){
+    public static  void de_i(Object msg){
         String objMsg = new Gson().toJson(msg);
         Log.i(TAG, objMsg);
     }
 
 
-    public static final void de_e(String msg){
+    public static void de_e(String msg){
         Log.e(TAG, msg);
     }
 

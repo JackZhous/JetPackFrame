@@ -1,12 +1,13 @@
 package com.jz.appframe.db;
 
-import android.os.Debug;
-
 import com.jz.appframe.BuildConfig;
+import com.jz.appframe.db.adapter.CoroutinesCallAdapterFactory;
+import com.jz.appframe.db.adapter.LiveDataCallAdapterFactory;
 import com.jz.appframe.db.req.Request;
 import com.jz.appframe.db.resp.Response;
 
 import androidx.lifecycle.LiveData;
+import kotlinx.coroutines.Deferred;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
@@ -22,7 +23,10 @@ import retrofit2.http.GET;
 public interface NetApi {
 
     @GET("test/login")
-    LiveData<Response> test(Request request);
+    LiveData<Response> testLiveData(Request request);
+
+    @GET("test/login")
+    Deferred<Response> testCoroutines(Request request);
 
 
     final class Factory{
@@ -35,6 +39,7 @@ public interface NetApi {
                             .baseUrl(url)
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(new LiveDataCallAdapterFactory())
+                            .addCallAdapterFactory(new CoroutinesCallAdapterFactory())
                             .build();
             }
 

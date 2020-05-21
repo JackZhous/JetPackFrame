@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jz.appframe.db.NetApi
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 /**
@@ -19,12 +21,12 @@ abstract class BaseVModel(var api: NetApi?) : ViewModel(){
     val exceptionData = MutableLiveData<String>()
 
     protected fun joinCoroutine(){
-        viewModelScope.launch (Dispatchers.IO){  }
+        val def = viewModelScope.async(Dispatchers.IO){
+
+        }
     }
 
+    suspend fun test(){
 
-    override fun onCleared() {
-        super.onCleared()
-        api = null
     }
 }

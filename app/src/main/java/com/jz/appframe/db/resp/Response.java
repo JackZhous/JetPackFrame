@@ -8,5 +8,17 @@ package com.jz.appframe.db.resp;
  * @describe TODO
  * @email jackzhouyu@foxmail.com
  **/
-public class Response {
+public class Response<T> {
+    int code;
+    String message;
+    T params;
+
+    public Response(int code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    public void setParams(T params) {
+        this.params = params;
+    }
 }
