@@ -12,24 +12,27 @@ import com.jz.appframe.db.room.RoomAgent;
 import com.jz.appframe.db.room.UserDao;
 import com.jz.appframe.model.UserViewModel;
 import com.jz.appframe.model.ViewModelFactory;
+import com.jz.appframe.ui.base.BaseActivity;
 
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity<UserViewModel> {
 
     @Inject
     UserDao dao;
-    @Inject
-    UserViewModel userModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
 
     public void onlogin(View view){
-        userModel.login("18828055318", "sdfsd");
+        module.login("18828055318", "sdfsd");
     }
+
+    protected Class<UserViewModel> provideModule(){
+        return UserViewModel.class;
+    }
+
 }

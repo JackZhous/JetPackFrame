@@ -1,13 +1,18 @@
 package com.jz.appframe.di;
 
+import android.content.Context;
+
 import com.jz.appframe.db.NetApi;
 import com.jz.appframe.model.UserViewModel;
 import com.jz.appframe.model.ViewModelFactory;
 import com.jz.appframe.ui.base.BaseActivity;
 
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
+import dagger.multibindings.IntoMap;
 
 /**
  * @author jackzhous
@@ -18,11 +23,13 @@ import dagger.Provides;
  * @email jackzhouyu@foxmail.com
  **/
 @Module
-public class MainActivityBuilder {
+abstract class ViewModelModule {
+    @Binds
+    @IntoMap
+    @ViewModelKey(UserViewModel.class)
+    abstract ViewModel bindUserViewModel(UserViewModel model);
 
-    @Provides
-    UserViewModel provideUVM(BaseActivity activity, NetApi api){
-//        return new ViewModelProvider(activity, ViewModelFactory.create(api)).get(UserViewModel.class);
-        return new UserViewModel(api);
-    }
+
+    @Binds
+    abstract ViewModelProvider.Factory bindVMProvider(ViewModelFactory factory);
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.jz.appframe.db.NetApi;
 import com.jz.appframe.db.room.RoomAgent;
 import com.jz.appframe.db.room.UserDao;
+import com.jz.appframe.model.ViewModelFactory;
 
 import javax.inject.Singleton;
 
@@ -19,8 +20,8 @@ import dagger.Provides;
  * @describe TODO
  * @email jackzhouyu@foxmail.com
  **/
-@Module
-public abstract class AppModule {
+@Module(includes = ViewModelModule.class)
+abstract class AppModule {
     @Singleton
     @Provides
     static NetApi provideApi(){
@@ -32,7 +33,5 @@ public abstract class AppModule {
     static UserDao provideUserDao(Context context){
         return RoomAgent.getInstance(context).userDao();
     }
-
-
 
 }

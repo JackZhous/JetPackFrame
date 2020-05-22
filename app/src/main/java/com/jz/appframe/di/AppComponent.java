@@ -20,14 +20,14 @@ import dagger.android.support.AndroidSupportInjectionModule;
  * @describe TODO
  * @email jackzhouyu@foxmail.com
  **/
-@Singleton
+//@Singleton
 @Component(modules =
                 {AndroidInjectionModule.class,
                 AndroidSupportInjectionModule.class,
                 ActivityModule.class,
                 AppModule.class})
-public interface AppComponent {
-    void inject(MyApp app);
+interface AppComponent {
+    MyApp inject(MyApp app);
 
     @Component.Builder
     interface Builder{
