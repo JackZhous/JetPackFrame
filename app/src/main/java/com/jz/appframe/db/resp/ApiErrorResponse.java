@@ -8,6 +8,12 @@ package com.jz.appframe.db.resp;
  * @describe TODO
  * @email jackzhouyu@foxmail.com
  **/
-public class ApiErrorResponse {
+public class ApiErrorResponse  extends RuntimeException{
+    int code;
+    public ApiErrorResponse(int code, String message) {
+        super(message);
+        this.code = code;
+    }
+
 
 }

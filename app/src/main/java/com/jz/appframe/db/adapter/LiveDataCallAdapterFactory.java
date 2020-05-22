@@ -1,6 +1,7 @@
 package com.jz.appframe.db.adapter;
 
-import com.jz.appframe.db.resp.ApiResponse;
+
+import com.jz.appframe.db.resp.JResponse;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
@@ -26,7 +27,7 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
         }
         Type type = getParameterUpperBound(0, (ParameterizedType) returnType);
         Class rawType = getRawType(type);
-        if(rawType != ApiResponse.class){
+        if(rawType != JResponse.class){
             throw new IllegalArgumentException("type must be a resource");
         }
 

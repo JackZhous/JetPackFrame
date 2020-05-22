@@ -3,8 +3,9 @@ package com.jz.appframe.db;
 import com.jz.appframe.BuildConfig;
 import com.jz.appframe.db.adapter.CoroutinesCallAdapterFactory;
 import com.jz.appframe.db.adapter.LiveDataCallAdapterFactory;
+import com.jz.appframe.db.req.ReqLogin;
 import com.jz.appframe.db.req.Request;
-import com.jz.appframe.db.resp.Response;
+import com.jz.appframe.db.resp.JResponse;
 
 import androidx.lifecycle.LiveData;
 import kotlinx.coroutines.Deferred;
@@ -23,11 +24,7 @@ import retrofit2.http.GET;
 public interface NetApi {
 
     @GET("test/login")
-    LiveData<Response> testLiveData(Request request);
-
-    @GET("test/login")
-    Deferred<Response> testCoroutines(Request request);
-
+    Deferred<JResponse<Object>> login(ReqLogin request);
 
     final class Factory{
         static Retrofit  agent;

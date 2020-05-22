@@ -2,6 +2,7 @@ package com.jz.appframe.di;
 
 import com.jz.appframe.ui.base.BaseActivity;
 
+import dagger.BindsInstance;
 import dagger.Subcomponent;
 import dagger.android.AndroidInjectionModule;
 import dagger.android.AndroidInjector;
@@ -15,10 +16,13 @@ import dagger.android.AndroidInjector;
  * @email jackzhouyu@foxmail.com
  **/
 @Subcomponent(modules = AndroidInjectionModule.class)
-public interface ActivityComponet extends AndroidInjector<BaseActivity> {
+public interface ActivitySubComponent extends AndroidInjector<BaseActivity> {
 
     //每一个继承BaseActivity的Activity都共享同一个SubComponent
     @Subcomponent.Builder
-    abstract class Builder extends AndroidInjector.Builder<BaseActivity>{};
+    abstract class Builder extends AndroidInjector.Builder<BaseActivity>{
+        @BindsInstance
+        abstract Builder baseActivity(BaseActivity activity);
+    }
 
 }

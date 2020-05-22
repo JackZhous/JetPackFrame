@@ -1,5 +1,8 @@
 package com.jz.appframe.db.adapter
 
+import com.jz.appframe.db.resp.ApiErrorResponse
+import com.jz.appframe.db.resp.JResponse
+import com.jz.appframe.util.AppConfig
 import com.jz.appframe.util.LogHelper
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
@@ -15,10 +18,10 @@ import java.lang.reflect.Type
  * @describe TODO
  * @email jackzhouyu@foxmail.com
  **/
-class CoroutinesCallAdapter<T>(private val returnType: Type) : CallAdapter<T, Deferred<T>>{
+class CoroutinesCallAdapter<T>(private val returnType: Type) : CallAdapter<JResponse<T>, Deferred<JResponse<T>>>{
 
-    override fun adapt(call: Call<T>): Deferred<T> {
-        val job = CompletableDeferred<T>()
+    override fun adapt(call: Call<JResponse<T>>): Deferred<JResponse<T>> {
+        val job = CompletableDeferred<JResponse<T>>()
 
         job.invokeOnCompletion {
             if (job.isCancelled) {
@@ -26,18 +29,18 @@ class CoroutinesCallAdapter<T>(private val returnType: Type) : CallAdapter<T, De
             }
         }
 
-        call.enqueue(object : Callback<T>{
-            override fun onFailure(call: Call<T>, t: Throwable) {
-                val cause = t.message ?: "unknown network error"
-                LogHelper.de_e(cause)
-                job.completeExceptionally(t)
+        call.enqueue(object : Callback<JResponse<T>>{
+            override fun onFailure(call: Call<JResponse<T>>, t: Throwable) {
+                val error = ApiErrorResponse(-1, t.message ?: "unknown error")
+                job.completeExceptionally(error)
             }
 
-            override fun onResponse(call: Call<T>, response: Response<T>) {
-                if (response.isSuccessful){
+            override fun onResponse(call: Call<JResponse<T>>, response: Response<JResponse<T>>) {
+                if (response.isSuccessful && response.body()?.code  == AppConfig.WEB_SUCCESS){
                     job.complete(response.body()!!)
                 }else{
-                    job.completeExceptionally(HttpException(response))
+                    val error = ApiErrorResponse(response.body()?.code ?: response.code(), response.body()?.message ?: response.message())
+                    job.completeExceptionally(error)
                 }
             }
         })
@@ -47,3 +50,5 @@ class CoroutinesCallAdapter<T>(private val returnType: Type) : CallAdapter<T, De
 
     override fun responseType() = returnType
 }
+
+

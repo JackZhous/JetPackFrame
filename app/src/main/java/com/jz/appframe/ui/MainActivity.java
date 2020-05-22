@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.jz.appframe.BuildConfig;
 import com.jz.appframe.R;
@@ -25,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        userModel = new ViewModelProvider(this, new ViewModelFactory()).get(UserViewModel.class);
+
+    }
+
+    public void onlogin(View view){
+        userModel.login("18828055318", "sdfsd");
     }
 }

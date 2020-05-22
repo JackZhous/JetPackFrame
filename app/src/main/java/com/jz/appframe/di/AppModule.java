@@ -23,13 +23,13 @@ import dagger.Provides;
 public abstract class AppModule {
     @Singleton
     @Provides
-    NetApi provideApi(){
+    static NetApi provideApi(){
         return NetApi.Factory.create().create(NetApi.class);
     }
 
     @Singleton
     @Provides
-    UserDao provideUserDao(Context context){
+    static UserDao provideUserDao(Context context){
         return RoomAgent.getInstance(context).userDao();
     }
 

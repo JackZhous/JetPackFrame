@@ -2,8 +2,12 @@ package com.jz.appframe.di;
 
 import com.jz.appframe.ui.MainActivity;
 
+import dagger.Binds;
 import dagger.Module;
+import dagger.android.AndroidInjector;
 import dagger.android.ContributesAndroidInjector;
+import dagger.multibindings.ClassKey;
+import dagger.multibindings.IntoMap;
 
 /**
  * @author jackzhous
@@ -13,10 +17,9 @@ import dagger.android.ContributesAndroidInjector;
  * @describe TODO
  * @email jackzhouyu@foxmail.com
  **/
-@Module(subcomponents = ActivityComponet.class)
+@Module(subcomponents = ActivitySubComponent.class)
 public abstract class ActivityModule {
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = MainActivityBuilder.class)
     abstract MainActivity mainActivityInjector();
-
 }

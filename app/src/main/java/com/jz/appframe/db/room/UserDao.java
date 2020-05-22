@@ -1,11 +1,11 @@
 package com.jz.appframe.db.room;
 
+import java.util.List;
+
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import io.reactivex.Completable;
-import io.reactivex.Observable;
 /**
  * @author jackzhous
  * @package com.jz.appframe.db.room
@@ -30,7 +30,7 @@ public interface UserDao {
 //    List<User> queryUserByAges(int[] agx);
 //
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    Completable insetUser(User user);
+    void insetUser(User user);
 //
 //    @Insert(onConflict = OnConflictStrategy.IGNORE)
 //    void insertStu(Stu user);
@@ -62,5 +62,5 @@ public interface UserDao {
      * Rxjava调用，有利于线程切换
      */
     @Query("SELECT * FROM user")
-    Observable<User> queryAllUser();
+    List<User> queryAllUser();
 }

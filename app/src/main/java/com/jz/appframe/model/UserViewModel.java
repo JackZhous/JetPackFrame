@@ -1,13 +1,10 @@
 package com.jz.appframe.model;
 
 import com.jz.appframe.db.NetApi;
+import com.jz.appframe.db.req.ReqLogin;
 import com.jz.appframe.model.base.BaseVModel;
 
-import org.jetbrains.annotations.NotNull;
-
 import javax.inject.Inject;
-
-import androidx.lifecycle.ViewModel;
 
 /**
  * @author jackzhous
@@ -19,7 +16,15 @@ import androidx.lifecycle.ViewModel;
  **/
 public class UserViewModel extends BaseVModel {
     @Inject
-    public UserViewModel(@NotNull NetApi api) {
+    public UserViewModel(NetApi api) {
         super(api);
+    }
+
+    public void login(String phone, String code){
+        if(isEmpty(phone, "[0-9]{11}", "手机号不允许为空", "手机号必须为11位")
+                || isEmpty(code, "验证码不能为空")){
+            return;
+        }
+        asynCorotines(new ReqLogin(phone, code), (it) -> getApi().login(it));
     }
 }

@@ -1,5 +1,7 @@
 package com.jz.appframe.model;
 
+import com.jz.appframe.db.NetApi;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,13 +16,24 @@ import androidx.lifecycle.ViewModelProvider;
  **/
 public class ViewModelFactory implements ViewModelProvider.Factory {
 
+    private NetApi api;
+
+    private ViewModelFactory(NetApi api) {
+        this.api = api;
+    }
+
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if(modelClass.isAssignableFrom(UserViewModel.class)){
-            return (T) new UserViewModel();
+            return (T) new UserViewModel(api);
         }
         //noinspection unchecked
         throw new IllegalArgumentException("Unknown ViewModel class");
     }
+
+    public static ViewModelFactory create(NetApi api){
+        return new ViewModelFactory(api);
+    }
+
 }
