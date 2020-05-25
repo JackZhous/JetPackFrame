@@ -5,7 +5,6 @@ import android.telephony.SmsManager;
 import com.jz.appframe.db.NetApi;
 
 import java.lang.reflect.InvocationTargetException;
-import java.nio.file.DirectoryIteratorException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,8 +29,6 @@ import androidx.lifecycle.ViewModelStoreOwner;
 public class ViewModelFactory implements ViewModelProvider.Factory {
 
     private NetApi api;
-    private static ViewModelFactory instance;
-
     @Inject
     public ViewModelFactory(NetApi api) {
         this.api = api;
@@ -50,17 +47,5 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         //noinspection unchecked
         throw new IllegalArgumentException("Unknown ViewModel class");
     }
-
-    public static ViewModelFactory create(NetApi api){
-        if(instance == null){
-            instance = new ViewModelFactory(api);
-        }
-        return instance;
-    }
-//
-//
-//    public <T extends ViewModel> T getModule(ViewModelStoreOwner owner, @NonNull Class<T> modelClass){
-//        return new ViewModelProvider(owner, this).get(modelClass);
-//    }
 
 }

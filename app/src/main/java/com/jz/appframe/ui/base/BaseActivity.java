@@ -8,18 +8,12 @@ import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.jz.appframe.di.AppComponent;
-import com.jz.appframe.model.UserViewModel;
-import com.jz.appframe.model.ViewModelFactory;
 import com.jz.appframe.model.base.BaseVModel;
 import com.jz.appframe.util.AppConfig;
 import com.jz.appframe.util.LogHelper;
 
-import javax.inject.Inject;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import dagger.android.AndroidInjection;
@@ -81,6 +75,5 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         progressDialog.dismiss();
     }
-
 
 }

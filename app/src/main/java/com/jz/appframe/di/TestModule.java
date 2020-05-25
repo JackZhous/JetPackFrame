@@ -23,8 +23,8 @@ import dagger.Provides;
 abstract class TestModule {
 
     @Provides
-    static TestViewModle provideTestModel(TestActivity activity, NetApi api){
-        return new ViewModelProvider(activity, ViewModelFactory.create(api)).get(TestViewModle.class);
+    static TestViewModle provideTestModel(TestActivity activity, ViewModelFactory factory){
+        return new ViewModelProvider(activity, factory).get(TestViewModle.class);
     }
 
 }

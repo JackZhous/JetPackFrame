@@ -25,8 +25,8 @@ import dagger.multibindings.IntoMap;
 @Module
 abstract class MainModule {
     @Provides
-    static UserViewModel provideUserModel(MainActivity activity, NetApi api){
-        return new ViewModelProvider(activity, ViewModelFactory.create(api)).get(UserViewModel.class);
+    static UserViewModel provideUserModel(MainActivity activity, ViewModelFactory factory){
+        return new ViewModelProvider(activity, factory).get(UserViewModel.class);
     }
 
     @Provides

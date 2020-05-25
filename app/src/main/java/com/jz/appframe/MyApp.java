@@ -28,7 +28,6 @@ public class MyApp extends Application implements HasActivityInjector {
     @Override
     public void onCreate() {
         super.onCreate();
-
         AppComponent component = DaggerAppComponent.builder().applicationCtx(this).build();
         if(component instanceof DaggerAppComponent){
             component.inject(this);

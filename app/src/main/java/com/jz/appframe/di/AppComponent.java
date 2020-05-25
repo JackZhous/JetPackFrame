@@ -23,6 +23,7 @@ import dagger.android.AndroidInjectionModule;
                 {AndroidInjectionModule.class,
                 AllActivityModule.class})
 public interface AppComponent {
+
     @Component.Builder
     interface Builder{
         @BindsInstance

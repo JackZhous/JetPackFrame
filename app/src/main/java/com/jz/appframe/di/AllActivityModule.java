@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.jz.appframe.db.NetApi;
 import com.jz.appframe.db.room.RoomAgent;
+import com.jz.appframe.model.ViewModelFactory;
 import com.jz.appframe.ui.MainActivity;
 import com.jz.appframe.ui.TestActivity;
 
@@ -34,6 +35,12 @@ abstract class AllActivityModule {
     @Provides
     static RoomAgent provideRoomAgent(Context context){
         return RoomAgent.getInstance(context);
+    }
+
+    @Singleton
+    @Provides
+    static ViewModelFactory provideViewModelFactory(NetApi api){
+        return new ViewModelFactory(api);
     }
 
     @ContributesAndroidInjector(modules = MainModule.class)
