@@ -1,12 +1,14 @@
 package com.jz.appframe.model.base
 
 import android.text.TextUtils
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jz.appframe.db.NetApi
 import com.jz.appframe.db.resp.JResponse
 import com.jz.appframe.util.AppConfig
+import com.jz.appframe.util.LogHelper
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,13 +23,13 @@ import java.util.regex.Pattern
  * @email jackzhouyu@foxmail.com
  **/
 open class BaseVModel(protected val api : NetApi) : ViewModel(){
-    //错误数据
-    val error = MutableLiveData<String>()
-    //状态数据，后台接口状态数据
-    val status = MutableLiveData<Int>()
+    //错误数据，网络操作过程中出现的错误
+    open val error = MutableLiveData<String>()
+    //状态数据，网络操作起始状态监听
+    open val status = MutableLiveData<Int>()
 
     /**
-     * 异步协程
+     * 异步协程,带有需要的返回参数
      */
     protected fun<Q, R> asynCorotines(req : Q,
                                       io : (Q) -> Deferred<JResponse<R>>,
@@ -45,7 +47,7 @@ open class BaseVModel(protected val api : NetApi) : ViewModel(){
     }
 
     /**
-     * 异步协程,无返回值
+     * 异步协程,只有基础的数据返回，如返回的response只有code和msg，没有detail部分
      */
     protected fun<Q> asynCorotines(req : Q,
                                    io : (Q) -> Deferred<JResponse<Any>>) {

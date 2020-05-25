@@ -3,14 +3,12 @@ package com.jz.appframe.di;
 import android.content.Context;
 
 import com.jz.appframe.MyApp;
-import com.jz.appframe.ui.MainActivity;
 
 import javax.inject.Singleton;
 
 import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
-import dagger.android.support.AndroidSupportInjectionModule;
 
 /**
  * @author jackzhous
@@ -23,17 +21,15 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Singleton
 @Component(modules =
                 {AndroidInjectionModule.class,
-                AndroidSupportInjectionModule.class,
-                ActivityModule.class,
-                AppModule.class})
+                AllActivityModule.class})
 public interface AppComponent {
-    void inject(MyApp app);
-
     @Component.Builder
     interface Builder{
         @BindsInstance
         Builder applicationCtx(Context context);
         AppComponent build();
     }
+
+    MyApp inject(MyApp app);
 
 }

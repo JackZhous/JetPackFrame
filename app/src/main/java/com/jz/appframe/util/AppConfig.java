@@ -11,8 +11,8 @@ package com.jz.appframe.util;
 public interface AppConfig {
     int WEB_SUCCESS = 1;
 
-    Integer START = 0;
-    Integer END = 1;
+    int START = 0;
+    int END = 1;
 
 
 }

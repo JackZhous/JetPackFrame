@@ -6,12 +6,15 @@ import com.jz.appframe.db.adapter.LiveDataCallAdapterFactory;
 import com.jz.appframe.db.req.ReqLogin;
 import com.jz.appframe.db.req.Request;
 import com.jz.appframe.db.resp.JResponse;
+import com.jz.appframe.db.resp.RespLogin;
 
 import androidx.lifecycle.LiveData;
 import kotlinx.coroutines.Deferred;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 /**
  * @author jackzhous
@@ -23,8 +26,11 @@ import retrofit2.http.GET;
  **/
 public interface NetApi {
 
-    @GET("test/login")
-    Deferred<JResponse<Object>> login(ReqLogin request);
+    @POST("app/")
+    Deferred<JResponse<RespLogin>> login(@Body ReqLogin request);
+
+    @POST("app/")
+    Deferred<JResponse<Object>> loginWithNoResposne(@Body ReqLogin request);
 
     final class Factory{
         static Retrofit  agent;

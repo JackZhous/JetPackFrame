@@ -3,6 +3,8 @@ package com.jz.appframe;
 import android.app.Activity;
 import android.app.Application;
 
+
+import com.jz.appframe.di.AppComponent;
 import com.jz.appframe.di.DaggerAppComponent;
 
 import javax.inject.Inject;
@@ -26,7 +28,11 @@ public class MyApp extends Application implements HasActivityInjector {
     @Override
     public void onCreate() {
         super.onCreate();
-        DaggerAppComponent.builder().applicationCtx(this).build();
+
+        AppComponent component = DaggerAppComponent.builder().applicationCtx(this).build();
+        if(component instanceof DaggerAppComponent){
+            component.inject(this);
+        }
     }
 
     @Override

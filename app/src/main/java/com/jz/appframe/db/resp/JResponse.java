@@ -11,7 +11,7 @@ package com.jz.appframe.db.resp;
 public class JResponse<T> {
     int code;
     String message;
-    T params;
+    T detail;
 
     public JResponse(int code, String message) {
         this.code = code;
@@ -19,7 +19,7 @@ public class JResponse<T> {
     }
 
     public void setParams(T params) {
-        this.params = params;
+        this.detail = params;
     }
 
     public int getCode() {
@@ -31,6 +31,6 @@ public class JResponse<T> {
     }
 
     public T getParams() {
-        return params;
+        return detail;
     }
 }
