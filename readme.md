@@ -11,8 +11,8 @@
 ## 使用步骤
 
 1. 创建Activity继承BaseActivity
-```java
 
+```java
 public class TestActivity extends BaseActivity {
     @Inject
     TestViewModle modle;
@@ -21,6 +21,7 @@ public class TestActivity extends BaseActivity {
 ```
 
 2. 在di的路径下的AllActivityModule添加部分模板类代码
+
 ```java
     //TestMoudle是为TestActivity类需要注入的实例提供，如上面的TestViewModle
     @ContributesAndroidInjector(modules = TestModule.class)
@@ -29,6 +30,7 @@ public class TestActivity extends BaseActivity {
 ```
 
 3. 编写TestViewModle继承BaseVModel即可，编写响应的访问接口
+
 ```java
 public class TestViewModle extends BaseVModel {
     //loginData为需要返回到Activity的LiveData
