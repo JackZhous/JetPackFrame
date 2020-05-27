@@ -64,11 +64,12 @@ public class TestActivity extends BaseActivity<UserViewModel> {
 ```
 
 __这一步，在Activity里面无须自己去定义UserViewModule成员变量，已经在父类BaseActivity中定义好了，直接使用定义好的就行了__
+
 如果某个你定义的Activity没有使用ViewModule，直接在getViewModelClass返回空即可
 
 
 
-4. 在自己编写的ViewModule中编写自己的业务路径即可
+### 第四步  在自己编写的ViewModule中编写自己的业务路径即可
 
 ```java
 public class TestViewModle extends BaseVModel {
@@ -89,4 +90,4 @@ public class TestViewModle extends BaseVModel {
 }
 ```
 
-其他相关细节问题，请看项目工程代码
+以上四个步骤，有很多类已经为你生成了，使用时只需要在相关类里面添加方法即可其他相关细节问题，请看项目工程代码;
