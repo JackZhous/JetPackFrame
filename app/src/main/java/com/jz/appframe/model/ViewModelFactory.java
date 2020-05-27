@@ -28,21 +28,25 @@ import androidx.lifecycle.ViewModelStoreOwner;
 @Singleton
 public class ViewModelFactory implements ViewModelProvider.Factory {
 
-    private NetApi api;
+    Map<Class<? extends ViewModel>, Provider<ViewModel>> creators;
+
     @Inject
-    public ViewModelFactory(NetApi api) {
-        this.api = api;
+    public ViewModelFactory(Map<Class<? extends ViewModel>, Provider<ViewModel>> map) {
+        creators = map;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
 
-        try {
-            return modelClass.getConstructor(NetApi.class).newInstance(api);
-        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | InstantiationException e) {
-            e.printStackTrace();
+        if(creators.get(modelClass) != null){
+            return (T) creators.get(modelClass).get();
         }
+//        try {
+//            return modelClass.getConstructor(NetApi.class).newInstance(api);
+//        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | InstantiationException e) {
+//            e.printStackTrace();
+//        }
 
         //noinspection unchecked
         throw new IllegalArgumentException("Unknown ViewModel class");

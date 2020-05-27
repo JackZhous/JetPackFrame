@@ -5,6 +5,8 @@ import com.jz.appframe.model.base.BaseVModel;
 
 import org.jetbrains.annotations.NotNull;
 
+import javax.inject.Inject;
+
 /**
  * @author jackzhous
  * @package com.jz.appframe.model
@@ -14,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
  * @email jackzhouyu@foxmail.com
  **/
 public class TestViewModle extends BaseVModel {
+    @Inject
     public TestViewModle(@NotNull NetApi api) {
         super(api);
     }

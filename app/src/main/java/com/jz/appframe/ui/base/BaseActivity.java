@@ -8,9 +8,13 @@ import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.jz.appframe.model.UserViewModel;
+import com.jz.appframe.model.ViewModelFactory;
 import com.jz.appframe.model.base.BaseVModel;
 import com.jz.appframe.util.AppConfig;
 import com.jz.appframe.util.LogHelper;
+
+import javax.inject.Inject;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,18 +31,31 @@ import dagger.multibindings.IntoMap;
  * @describe TODO
  * @email jackzhouyu@foxmail.com
  **/
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity<M extends BaseVModel> extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
     protected boolean enableProgressDialog;
-    protected abstract BaseVModel getModel();
+
+    @Inject
+    ViewModelProvider.Factory factory;
+    protected M module;
+
+    protected abstract Class<M> getViewModelClass();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-        getModel().getError().observe(this, this::showMsg);
-        getModel().getStatus().observe(this, it -> {
+        initObserver();
+    }
+
+    private void initObserver(){
+        if(getViewModelClass() == null){
+            return;
+        }
+        module = new ViewModelProvider(this, factory).get(getViewModelClass());
+        module.getError().observe(this, this::showMsg);
+        module.getStatus().observe(this, it -> {
             if(!enableProgressDialog){
                 return;
             }

@@ -12,12 +12,12 @@ import com.jz.appframe.ui.base.BaseActivity;
 
 import javax.inject.Inject;
 
-public class MainActivity extends BaseActivity {
+import androidx.lifecycle.ViewModelProvider;
+
+public class MainActivity extends BaseActivity<UserViewModel> {
 
     @Inject
     UserDao dao;
-    @Inject
-    UserViewModel module;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +30,10 @@ public class MainActivity extends BaseActivity {
         module.login1("13883976960", "sdfsd");
     }
 
-    protected BaseVModel getModel(){
-        return module;
+    @Override
+    protected Class<UserViewModel> getViewModelClass() {
+        return UserViewModel.class;
     }
-
 
     public void onjump(View view){
         jumpTo(TestActivity.class);

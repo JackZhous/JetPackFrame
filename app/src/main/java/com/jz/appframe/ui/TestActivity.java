@@ -4,12 +4,14 @@ import android.os.Bundle;
 
 import com.jz.appframe.R;
 import com.jz.appframe.model.TestViewModle;
+import com.jz.appframe.model.UserViewModel;
 import com.jz.appframe.model.base.BaseVModel;
 import com.jz.appframe.ui.base.BaseActivity;
 
 import javax.inject.Inject;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 
 /**
  * @author jackzhous
@@ -19,10 +21,7 @@ import androidx.annotation.Nullable;
  * @describe TODO
  * @email jackzhouyu@foxmail.com
  **/
-public class TestActivity extends BaseActivity {
-    @Inject
-    TestViewModle modle;
-
+public class TestActivity extends BaseActivity<TestViewModle> {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,7 +30,7 @@ public class TestActivity extends BaseActivity {
     }
 
     @Override
-    protected BaseVModel getModel() {
-        return modle;
+    protected Class<TestViewModle> getViewModelClass() {
+        return TestViewModle.class;
     }
 }

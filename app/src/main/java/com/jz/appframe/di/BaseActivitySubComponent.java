@@ -1,5 +1,6 @@
 package com.jz.appframe.di;
 
+import com.jz.appframe.model.base.BaseVModel;
 import com.jz.appframe.ui.base.BaseActivity;
 
 import androidx.lifecycle.ViewModel;
@@ -17,11 +18,11 @@ import dagger.android.AndroidInjector;
  * @email jackzhouyu@foxmail.com
  **/
 @Subcomponent(modules = AndroidInjectionModule.class)
-public interface BaseActivitySubComponent extends AndroidInjector<BaseActivity> {
+public interface BaseActivitySubComponent extends AndroidInjector<BaseActivity<BaseVModel>> {
 
     //每一个继承BaseActivity的Activity都共享同一个SubComponent
     @Subcomponent.Builder
-    abstract class Builder extends AndroidInjector.Builder<BaseActivity>{
+    abstract class Builder extends AndroidInjector.Builder<BaseActivity<BaseVModel>>{
     }
 
 }

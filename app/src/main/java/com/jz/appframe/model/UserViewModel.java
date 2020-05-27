@@ -5,6 +5,8 @@ import com.jz.appframe.db.req.ReqLogin;
 import com.jz.appframe.db.resp.RespLogin;
 import com.jz.appframe.model.base.BaseVModel;
 
+import javax.inject.Inject;
+
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -19,7 +21,7 @@ import androidx.lifecycle.MutableLiveData;
 public class UserViewModel extends BaseVModel {
 
     public MutableLiveData<RespLogin> loginData = new MutableLiveData<>();
-
+    @Inject
     public UserViewModel(NetApi api) {
         super(api);
     }

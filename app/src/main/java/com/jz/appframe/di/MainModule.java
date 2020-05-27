@@ -24,10 +24,10 @@ import dagger.multibindings.IntoMap;
  **/
 @Module
 abstract class MainModule {
-    @Provides
-    static UserViewModel provideUserModel(MainActivity activity, ViewModelFactory factory){
-        return new ViewModelProvider(activity, factory).get(UserViewModel.class);
-    }
+//    @Provides
+//    static UserViewModel provideUserModel(MainActivity activity, ViewModelFactory factory){
+//        return new ViewModelProvider(activity, factory).get(UserViewModel.class);
+//    }
 
     @Provides
     static UserDao provideUserDao(RoomAgent activity){

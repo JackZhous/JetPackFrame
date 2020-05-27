@@ -32,5 +32,4 @@ public interface AppComponent {
     }
 
     MyApp inject(MyApp app);
-
 }

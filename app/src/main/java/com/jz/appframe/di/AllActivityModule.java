@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.jz.appframe.db.NetApi;
 import com.jz.appframe.db.room.RoomAgent;
-import com.jz.appframe.model.ViewModelFactory;
 import com.jz.appframe.ui.MainActivity;
 import com.jz.appframe.ui.TestActivity;
 
@@ -22,7 +21,7 @@ import dagger.android.ContributesAndroidInjector;
  * @describe TODO
  * @email jackzhouyu@foxmail.com
  **/
-@Module(subcomponents = BaseActivitySubComponent.class)
+@Module(subcomponents = BaseActivitySubComponent.class, includes = ViewModuleModel.class)
 abstract class AllActivityModule {
 
     @Singleton
@@ -37,17 +36,12 @@ abstract class AllActivityModule {
         return RoomAgent.getInstance(context);
     }
 
-    @Singleton
-    @Provides
-    static ViewModelFactory provideViewModelFactory(NetApi api){
-        return new ViewModelFactory(api);
-    }
-
+    //如果某一个类需要提供其他出ViewModuel意外的依赖，可以创建一个Module，如下
     @ContributesAndroidInjector(modules = MainModule.class)
     abstract MainActivity mainActivityInjector();
 
 
-    @ContributesAndroidInjector(modules = TestModule.class)
+    @ContributesAndroidInjector
     abstract TestActivity testActivityInjector();
 
 }
