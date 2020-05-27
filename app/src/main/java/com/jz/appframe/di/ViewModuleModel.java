@@ -21,7 +21,9 @@ import dagger.multibindings.IntoMap;
  * date on 2020/5/27 11:43 AM
  * @describe
  * 生成所有的ViewModel，会将生成的Provider<T>装入到ViewModelFactory
- * 的Map中去
+ * 的Map中去;这里无须担心app已启动就创建了所有ViewModule，不会的，这里只是创建了
+ * Provider<ViewModule>,你在注入inject具体类时，才会去get这个Provider，然后
+ * Provider.get才会new具体的ViewModule
  * @email jackzhouyu@foxmail.com
  **/
 @Module
