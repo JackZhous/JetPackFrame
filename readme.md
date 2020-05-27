@@ -69,7 +69,7 @@ __这一步，在Activity里面无须自己去定义UserViewModule成员变量�
 
 
 
-### 第四步  在自己编写的ViewModule中编写自己的业务路径即可
+### 第四步  在自己编写的ViewModule中编写自己的业务逻辑即可
 
 ```java
 public class TestViewModle extends BaseVModel {
